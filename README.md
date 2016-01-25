@@ -1,7 +1,7 @@
 # approximation-with-kernel-methods---course-work
 Approximation with Kernel Methods - Master Sem 3 - Prof. Haasdonk - Coursework
 
-**keryword**
+**kerywords**
 -------------
 1. Kernel Methods
 2. RKHS
