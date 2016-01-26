@@ -1,5 +1,5 @@
 function kernel_laplace = k_gauss_laplace(gamma)
-%K_GAUSS_GRAD Summary of this function goes here
+%K_GAUSS_GRAD 
 % 
 % [kernel_laplace] = K_GAUSS_GRAD(gamma)
 % return is a function handel

@@ -1,7 +1,7 @@
-function [error] = Task3(m, gamma_list, method)
+function [error_l] = Task3(alpha, m, gamma_list, method)
 %TASK3 Summary of this function goes here
 % 
-% [OUTPUTARGS] = TASK3(INPUTARGS) Explain usage here
+% [error] = TASK3(m, gamma_list, method) Explain usage here
 % 
 % Examples: 
 % 
@@ -11,10 +11,9 @@ function [error] = Task3(m, gamma_list, method)
 
 % $Author: yihu $	$Date: 2016/01/21 23:04:06 $	$Revision: 0.1 $
 
-refine = 2; % Increase the smoothness of surf plot
-% plot_prec = 0.05; % Increase more elements for surf plot
+refine = 2; % for visualization
 
-alpha = 0.5; beta = 0.5;
+beta = 0.2;
 model = general_model([alpha beta]);
 
 a = -1;
@@ -48,6 +47,9 @@ Yvis(ind) = NaN;
 % Xcenter = trim_data_set(Xcenter, corners);
 % Xvis = trim_data_set(Xvis, corners);  
 
+test_num = length(gamma_list);
+f_approx = cell(1,test_num);
+
 if method == 'd'
     % Assemble with finite quotient
     for i=1:length(gamma_list)
@@ -60,8 +62,7 @@ if method == 'd'
                             assemble_RBF_collocation_system(model, kernel, kernel_grad, ... 
                                                             Xcol, Xcenter, fd_para);
 
-        [error] = solve_pde(Xcenter, Xvis, Yvis, model, kernel, assemble_method, gamma);
-        visualize(model.solution,Xvis,Yvis,Xcenter,0);
+        f_approx{i} = solve_pde(Xcenter, model, kernel, assemble_method);
     end
 elseif method == 'f'
     % Assemble with laplace of kernel
@@ -76,14 +77,13 @@ elseif method == 'f'
                             assemble_RBF_collocation_system(model, kernel, kernel_grad, Xcol, Xcenter, ... 
                                                             fd_para, kernel_laplace);
 
-        [error] = solve_pde(Xcenter, Xvis, Yvis, model, kernel, assemble_method, gamma);
-        visualize(model.solution,Xvis,Yvis,Xcenter,0);
+        f_approx{i} = solve_pde(Xcenter, model, kernel, assemble_method);
     end
 else
     error('method not valid');
 end
 
-
+error_l = post_process(model.solution, f_approx, gamma_list, Xvis, Yvis, Xcenter);
 
 
 function X = trim_data_set(X, X_exclude)

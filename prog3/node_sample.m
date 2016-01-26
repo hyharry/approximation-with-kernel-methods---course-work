@@ -1,4 +1,5 @@
 function [X, quality] = node_sample(n,nrand,a,b,c,d)
+% Simple random sampling in a domain. Quality is not guaranteed
 
 % X = [0 0;1 0;1 1;0 1];
 x = linspace(0,1,nrand)';

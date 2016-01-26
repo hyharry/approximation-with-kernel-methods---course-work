@@ -1,4 +1,7 @@
 function [div_a_grad_k, a_grad_k] = diff_quotients(a, grad_k, para)
+% DIFF_QUOTINETS generate function handle for later assembling using pure
+% functional programming. Finite quotient of derivatice approximation is used
+% 
 % a: func_handle diffusivity
 % grad_k: cell array of func_handle {grad_k_x, grad_k_y, ...}
 % para: fd distance

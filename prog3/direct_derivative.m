@@ -1,4 +1,6 @@
 function [div_a_grad_k, a_grad_k] = direct_derivative(a, grad_k, grad_a, laplace_k)
+% DIRECT_DERIVATIVE use laplace of kernel to construct function handle
+% 
 % a: func_handle diffusivity
 % grad_k: cell array of func_handle {grad_k_x, grad_k_y, ...}
 % grad_a: gradient of diffusivity

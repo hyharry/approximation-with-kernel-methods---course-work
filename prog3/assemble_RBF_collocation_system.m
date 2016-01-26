@@ -27,15 +27,24 @@ X_neum = Xcol(neum_ind,:);
 
 % Equation (1), PDE in domain
 a = model.diffusivity;
+
+display('func_handle time')
+tic;
 % Generate function handle for the discretized equation
+% TODO: routine that calculates result matrices is more efficient
 if nargin == 7
     a_grad = model.diffusivity_gradient;
     [div_a_grad_k, a_grad_k] = direct_derivative(a, kernel_grad, a_grad, kernel_laplace);
 else
     [div_a_grad_k, a_grad_k] = diff_quotients(a, kernel_grad, fd_para);
 end
+toc;
+
+display('assemble time')
+tic;
 A1 = -div_a_grad_k(X_inner, Xcenter);
 b1 = model.source(X_inner);
+toc;
 
 % Equation (2), Dirichlet BC
 A2 = kernel(X_diri, Xcenter);
