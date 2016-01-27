@@ -61,3 +61,9 @@ else
 end
 
 error_l = post_process(model.solution, f_approx, gamma_list, Xvis, Yvis, Xcenter);
+
+% if method == 'f'
+%     title(sprintf('Poisson Equation Approximation (finite quotient)'));
+% else
+%     title(sprintf('Poisson Equation Approximation (direct derivative)'));
+% end

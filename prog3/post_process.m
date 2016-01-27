@@ -27,7 +27,7 @@ visualize(f_exact,Xvis,Yvis,Xcenter,0);
 figure;
 plot(gamma_list,error);
 set(gca,'Xscale','log');
-title('error of different gamma')
+title('error of different gammas')
 xlabel('gamma');
 ylabel('L inf error')
 
